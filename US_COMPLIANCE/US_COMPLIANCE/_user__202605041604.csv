@@ -1,0 +1,3 @@
+"id","name","email","password","role","createdBy","updatedBy","created_at","updated_at"
+1,admin,admin@uniqueschools.ie,$2b$10$eii1hEWltL0MPhnC0Z758eWNz2FoG7KCu0D9w.iDs19ocrQIiXBzS,ADMIN,,,"2025-03-04 13:00:56.130","2025-03-04 13:00:56.128"
+2,iso,iso@uniqueschools.ie,$2b$10$FwaJqH9wTJIsvJ.Kd2Kbf.9qHF.aGlg367.8kW0obZfWuX.YHnO0C,USER,1,1,"2025-03-04 13:04:20.765","2025-03-04 13:04:20.765"

@@ -1,0 +1,270 @@
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cc-table-border: #e5e5e5;
+  --cc-table-header: #f5f5f5;
+  --cc-table-cell: #ffffff;
+  --accent: #171717;
+  --accent-hover: #262626;
+}
+
+body {
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+}
+
+@layer components {
+  /* v0-style: neutral primary, rounded-xl; micro-interactions 200ms ease-out */
+  .btn-primary {
+    @apply inline-flex transform-gpu items-center justify-center rounded-xl bg-neutral-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition duration-200 ease-out hover:bg-neutral-800 hover:opacity-[0.96] hover:shadow-md active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2;
+  }
+  .btn-secondary {
+    @apply inline-flex transform-gpu items-center justify-center rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 shadow-sm transition duration-200 ease-out hover:bg-neutral-50 hover:shadow-md active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-300 focus-visible:ring-offset-2;
+  }
+  .btn-danger {
+    @apply inline-flex transform-gpu items-center justify-center rounded-xl bg-red-600 px-3 py-1.5 text-sm font-medium text-white shadow-sm transition duration-200 ease-out hover:bg-red-700 hover:opacity-[0.96] active:scale-[0.98];
+  }
+  /** Primary save: pill, dark — use in toolbars / sheet headers (top-right). */
+  .btn-save {
+    @apply inline-flex transform-gpu items-center justify-center gap-2 rounded-full bg-neutral-900 px-5 py-2 text-sm font-medium text-white shadow-sm transition duration-200 ease-out hover:bg-neutral-800 hover:opacity-[0.96] hover:shadow-md active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+  /** Risk nav: dashboard / register / CSV download (same pill as primary, compact). */
+  .btn-nav-pill {
+    @apply inline-flex transform-gpu items-center justify-center gap-1.5 rounded-full bg-neutral-900 px-4 py-1.5 text-xs font-medium text-white no-underline shadow-sm transition duration-200 ease-out hover:bg-neutral-800 hover:opacity-[0.96] hover:shadow-md active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2;
+  }
+  .field-input {
+    @apply mt-1 w-full rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm shadow-sm transition duration-200 ease-out focus:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-200 focus-visible:ring-2 focus-visible:ring-neutral-400;
+  }
+
+  /** Soft glow on interactive controls (works with or without custom cursor). */
+  .cc-interactive-glow {
+    @apply transition duration-200 ease-out;
+  }
+  .cc-interactive-glow:hover {
+    box-shadow:
+      0 0 0 1px rgb(212 212 216 / 0.45),
+      0 8px 28px -8px rgb(0 0 0 / 0.1);
+  }
+
+  /** Risk routes — slate/sky admin (list-style UI: bordered panels, sky focus). */
+  .btn-risk-nav {
+    @apply inline-flex transform-gpu items-center justify-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm no-underline transition duration-200 ease-out hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 active:scale-[0.98];
+  }
+  .btn-risk-primary {
+    @apply inline-flex transform-gpu items-center justify-center gap-1.5 rounded-full bg-slate-800 px-4 py-2 text-sm font-semibold text-white shadow-sm transition duration-200 ease-out hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+}
+
+/* Tabular data grids — v0: soft border + minimal shadow */
+.cc-table-wrap {
+  @apply w-full overflow-x-auto rounded-2xl border border-neutral-200/90 bg-white shadow-[0_1px_2px_0_rgb(0_0_0_/_0.04)] transition duration-200 ease-out;
+}
+
+.cc-table-wrap:hover {
+  box-shadow:
+    0 1px 2px 0 rgb(0 0 0 / 0.05),
+    0 10px 36px -12px rgb(0 0 0 / 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-table-wrap {
+    transition: none;
+  }
+  .cc-table-wrap:hover {
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  }
+}
+
+/* Custom cursor: hide system cursor when dot is active (fine pointer + motion OK). */
+html.cc-custom-cursor,
+html.cc-custom-cursor body,
+html.cc-custom-cursor body * {
+  cursor: none !important;
+}
+
+.cc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.cc-table th,
+.cc-table td {
+  border: 1px solid var(--cc-table-border);
+  padding: 8px 10px;
+  vertical-align: top;
+  background: var(--cc-table-cell);
+}
+
+.cc-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--cc-table-header);
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  color: #3f3f46;
+  box-shadow: 0 1px 0 var(--cc-table-border);
+}
+
+.cc-table tbody tr:nth-child(even) td {
+  background: #fafafa;
+}
+
+.cc-table .cc-muted {
+  color: #71717a;
+  opacity: 0.9;
+}
+
+.cc-table input[type="checkbox"] {
+  @apply h-4 w-4 rounded border-neutral-300 text-neutral-900 focus:ring-neutral-400;
+}
+
+/* Risk register tables — slate borders, compact uppercase header */
+.risk-table-theme {
+  --cc-table-border: #e2e8f0;
+  --cc-table-header: #f8fafc;
+  --cc-table-cell: #ffffff;
+}
+.risk-table-theme .cc-table thead th {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #64748b;
+}
+.risk-table-theme .cc-table tbody tr:nth-child(even) td {
+  background: #f8fafc;
+}
+.risk-table-theme .cc-table select {
+  @apply rounded-md border-slate-300 focus:border-sky-500 focus:ring-sky-500;
+}
+.risk-table-wrap {
+  @apply w-full overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-sm transition duration-200 ease-out;
+}
+
+.cc-table select {
+  @apply w-full min-w-[7rem] rounded-lg border border-neutral-200 bg-white px-2 py-1.5 text-xs shadow-sm;
+}
+
+.cc-toolbar-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  max-width: 72rem;
+  font-size: 13px;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+}
+
+.cc-toolbar-table th,
+.cc-toolbar-table td {
+  border-bottom: 1px solid var(--cc-table-border);
+  padding: 10px 14px;
+  vertical-align: middle;
+  background: #fff;
+}
+
+.cc-toolbar-table th {
+  background: #fafafa;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  color: #525252;
+  width: 1%;
+}
+
+.cc-toolbar-table tr:last-child th,
+.cc-toolbar-table tr:last-child td {
+  border-bottom: none;
+}
+
+@layer base {
+  :root {
+    --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+    --font-heading: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+    --radius-md: var(--radius);
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    /* Indigo-aligned primary to match legacy .btn-primary / accent */
+    --primary: oklch(0.488 0.243 264.376);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --radius: 0.625rem;
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: oklch(0.205 0 0);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.708 0 0);
+  }
+  .dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.922 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.556 0 0);
+  }
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}

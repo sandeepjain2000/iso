@@ -1,0 +1,36 @@
+"id","name","asset_type_id"
+1,Data,1
+2,Intellectual Property,1
+3,Software,1
+4,Configuration Data,1
+5,Hardware,2
+6,Mobile Devices,2
+7,Networking Equipment,2
+8,Media,2
+9,Printers and Scanners,2
+10,Employees,3
+11,Contractors and Third-Party Vendors,3
+12,Servers,4
+13,Databases,4
+14,Cloud Resources,4
+15,Applications,4
+16,Network Infrastructure,5
+17,Firewalls and Security Devices,5
+18,DNS and Domain Names,5
+19,External Services,6
+20,Internal IT Services,6
+21,Policies,7
+22,Procedures and Manuals,7
+23,Audit Logs and Logs,7
+24,Access Control Systems,8
+25,CCTV and Monitoring Systems,8
+26,Environmental Controls,8
+27,Backup Systems,9
+28,Disaster Recovery Plans,9
+29,Contracts and Agreements,10
+30,Licensing Information,10
+31,Regulatory Documents,10
+32,Business Continuity Plans,11
+33,Emergency Response Systems,11
+34,Vulnerability Data,12
+35,Risk Registers,12
